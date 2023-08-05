@@ -65,6 +65,7 @@ When a user clicks on the shortened URL, a GET request is sent to the server wit
 
 #### Deleting URLS from database
 When a user clicks the "Delete" button next to a URL on the index page, a DELETE request is sent to the server with the URL's ID as a parameter. The server then looks up the "urls" entity with the matching ID and deletes it from the database.
+
 ![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/0bfc13c3-97dd-402c-9f4b-61c9fa7e9c24)
 
 ### Database Schema Design
