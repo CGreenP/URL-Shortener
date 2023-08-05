@@ -14,6 +14,36 @@ Some features are as follows:
 * URL deletion: The application allows users to delete short URLs that are no longer needed.
 * Database storage: The application uses MongoDB to store the full URLs, short URLs, and click counts of each URL.
 
+## Advantage And Disadvantage of URL Shortener
+Like all projects, this project has its advantages and disadvantages. It’s important to get a good handle on the pros and cons so you can be informed when making your strategic decisions.
+
+### Advantages
+* Our application is simple and easy to use. It has a minimal and intuitive user interface that allows the user to enter, view, and delete URLs.
+* Our application is fast and efficient. It can generate and store URLs in a matter of seconds, and redirect the user to the original URL without any delay.
+* Our application is scalable and flexible. It can handle any number of URLs and clicks, and it can be easily modified or extended with new features or functionalities.
+* Provides a simple and easy-to-use web interface to shorten URLs.
+* Allows users to keep track of the number of clicks on their shortened URLs.
+* Uses a reliable and widely used database system (MongoDB) for storing the URLs and their associated data.
+* Uses a popular and well-supported web development framework (Express) for creating the application.
+* The code is modular and organized, making it easy to maintain and scale.
+
+### Disadvantages
+* Our application is not secure or reliable. It does not validate or sanitize the user input, nor does it encrypt or hash the URLs in the database. It also does not handle any errors or exceptions that may occur during the execution.
+* Our application is not user-friendly or accessible. It does not provide any feedback or confirmation to the user when they perform an action, nor does it support any accessibility features such as keyboard navigation or screen readers.
+* Our application is not original or innovative. It does not offer any unique or distinctive features that differentiate it from other existing URL shortener services. It also does not have any branding or identity that attracts or retains the user’s attention.
+* The code only supports shortening URLs and does not provide any other features or functionalities.
+* The application runs on a single server, which can limit scalability and increase downtime if the server goes down.
+* The code does not have any security features implemented, such as authentication or input validation, which can make it vulnerable to attacks such as SQL injection or cross-site scripting (XSS).
+* The application relies on third-party libraries, which can introduce potential vulnerabilities or compatibility issues if not kept up-to-date.
+
+### Limitations of Existing Techniques or Methods
+* Existing URL shortener services may have limited storage capacity or bandwidth, which may affect their performance or availability. They may also impose restrictions on the number or length of URLs that can be shortened or stored.
+* Existing URL shortener services may have privacy or security issues, as they may collect or share the user’s data or browsing history. They may also expose the user to malicious or harmful URLs that may contain viruses, malware, or phishing scams.
+* Existing URL shortener services may have usability or compatibility issues, as they may not support all types of URLs or platforms. They may also have inconsistent or confusing user interfaces that may frustrate or confuse the user.
+* Existing URL shortening techniques or methods often rely on a centralized service to store and redirect URLs, which can be a single point of failure and raise concerns about privacy and security.
+* The generated short URLs can be easily guessed or brute-forced, leading to potential security vulnerabilities.
+* Some existing techniques may not be scalable or efficient enough to handle a large volume of requests, especially in the case of high-traffic websites.
+
 ## ARCHITECTURE
 These are the architectural designs of our application which will give a basic understanding of workings by our application. Some of the designs are described in a summarized way by which you can understand the structure.
 ### Architecture of the Application
@@ -59,7 +89,7 @@ Download Link: https://code.visualstudio.com/download
 3. Download and Install MongoDB Compass for database purpose.
 Download Link: https://www.mongodb.com/try/download/compass
 
-Once you have installed MongoDB Compass, you can connect to your MongoDB host by either providing your connection string or specifying advanced connection options. Create a connection string. For that, you’ll need to enter the same URI as the URI entered in code in order to connect to the database. For our use case the URI would be mongodb://localhost:27017 and after that click the connect button.
+Once you have installed MongoDB Compass, you can connect to your MongoDB host by either providing your connection string or specifying advanced connection options. Create a connection string. For that, you’ll need to enter the same URI as the URI entered in code in order to connect to the database. For our use case the URI would be **mongodb://localhost:27017** and after that click the connect button.
 
 ![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/fc1a96a0-d109-4cd5-9b12-8e6ddcca6418)
 
@@ -76,6 +106,34 @@ This is a section where the working and the final result for the application is 
 ### Creating Short URL from Full URL
 User inputs the full URL into the input field URL on the index page http://localhost:5000/. When the form is submitted by clicking the Shrink button, the full URL is sent to the server via a POST request to the "/shorturls" endpoint. The server then creates a new "urls" entity with the full URL and a generated shortened URL. The shortened URL is then displayed on the index page along with the full URL and the number of clicks in table format.
 ![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/9e87ff34-4ef1-4390-b4ca-7cfcb80d574a)
-<p align="center">Index Page</p>
-![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/23bcc5a3-8ea4-4476-9ab7-694e7f0292c4)
-<p align="center">Entering a URL to be Shortened</p>
+<p align="center"><i>Index Page</i></p>
+
+![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/763d6549-3c01-4d74-984f-43e156792176)
+<p align="center"><i>Entering a URL to be Shortened</i></p>
+
+![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/3223b6d8-8c24-4829-9a3c-cb15c3d703a0)
+<p align="center"><i>Short URL gets created</i></p>
+
+### Redirecting clients from Short URL to Full URL
+When a user clicks on the shortened URL, a GET request is sent to the server with the shortened URL as a parameter. The server then looks up the "urls" entity in the database with the matching shortened URL and redirects the user to the full URL and increases the number of clicks.
+![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/9635770a-951e-4dfd-9bd3-6eeff51f4d56)
+<p align="center"><i>Clicking on the Short URL</i></p>
+
+![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/a02fe10a-261f-4245-94cd-193e05208d55)
+<p align="center"><i>Redirecting clients from Short URL to Full URL</i></p>
+
+![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/6f66339e-4956-42a6-8077-258a44ec82a9)
+<p align="center"><i>Number of Clicks gets updated in the Index Page</i></p>
+
+### Deleting URLS
+When a user clicks the "Delete" button next to a URL on the index page, a DELETE request is sent to the server with the URL's ID as a parameter. The server then looks up the "urls" entity with the matching ID and deletes it from the database.
+![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/cad01ff7-bbce-416b-b082-c5832dacdc0e)
+<p align="center"><i>Clicking on the Delete button to delete the short URL</i></p>
+
+![image](https://github.com/CGreenP/URL-Shortener/assets/56307530/6789f4df-6584-497b-b9f2-c2ff645e9939)
+<p align="center"><i>After deletion the Index Page</i></p>
+
+## CONCLUSION
+In this project, we have created a simple URL shortener using Node.js, Express, MongoDB and Mongoose. We have used shortid to generate unique short URLs and EJS to render the front-end. We have also implemented basic CRUD operations for the URL model and handled redirection and error cases. This project demonstrates how to use web development technologies to create a useful and user-friendly application that can shorten long URLs and track their clicks.
+
+Overall, the code provides a good starting point for building a URL shortener web application and can be easily extended and customized to meet specific requirements.
